@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Événements</title>
+    <link rel="stylesheet" href="/css/evenements.css">
+</head>
+<body>
+<h1>Liste des Événements</h1>
+
+<div th:if="${success}">
+    <p th:text="${success}" style="color: green;"></p>
+
+    <!-- Button to see tickets -->
+    <form th:action="@{/tickets}" method="get" style="display: inline;">
+        <input type="hidden" name="userId" th:value="${userId}" />
+        <button type="submit">🎟️ Voir mes tickets</button>
+    </form>
+</div>
+
+<div th:if="${error}" style="color: red; font-weight: bold;">
+    <p th:text="${error}"></p>
+</div>
+
+<div class="evenement-container">
+    <div class="evenement" th:each="event : ${evenements}">
+        <h2 th:text="${event.titre}">Titre</h2>
+        <p><strong>Lieu:</strong> <span th:text="${event.lieu}">Lieu</span></p>
+        <p><strong>Nombre de sièges:</strong> <span th:text="${event.nb_sieges}">0</span></p>
+        <p><strong>Date:</strong> <span th:text="${event.dateEvenement}">Date</span></p>
+
+        <!-- Formulaire de réservation -->
+        <form th:action="@{/reserve}" method="post">
+            <input type="hidden" name="eventId" th:value="${event.idEvenement}" />
+            <input type="hidden" name="userId" th:value="${userId}" />
+            <label for="seatNumber">Numéro de siège:</label>
+            <input type="number" name="seatNumber" min="1" required />
+            <button type="submit">Réserver</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

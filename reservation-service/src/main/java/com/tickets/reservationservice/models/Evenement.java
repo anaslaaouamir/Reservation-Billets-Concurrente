@@ -2,6 +2,7 @@ package com.tickets.reservationservice.models;
 
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
@@ -15,7 +16,7 @@ public class Evenement {
 
     private int idEvenement;
     private String titre;
-    private LocalDateTime dateEvenement;
+    private LocalDate dateEvenement;
     private String lieu;
     private int nb_sieges;
 

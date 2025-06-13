@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mes Tickets</title>
+    <link rel="stylesheet" href="/css/tickets.css">
+</head>
+<body>
+<h1>🎟️ Tickets de <span th:text="${user.nom}"></span></h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Événement</th>
+        <th>Date</th>
+        <th>Lieu</th>
+        <th>Siège</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="ticket : ${tickets}">
+        <td th:text="${ticket.titreEvenement}"></td>
+        <td th:text="${ticket.dateEvenement}"></td>
+        <td th:text="${ticket.lieu}"></td>
+        <td th:text="${ticket.siegeNum}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<p th:if="${tickets.size() == 0}">Aucun ticket disponible pour le moment. Veuillez patienter...</p>
+
+</body>
+</html>

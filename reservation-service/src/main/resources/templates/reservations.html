@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Réservations</title>
+    <link rel="stylesheet" href="/css/reservations.css">
+</head>
+<body>
+
+<h1>📋 Liste des Réservations</h1>
+
+<table th:if="${reservations.size() > 0}">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nom Utilisateur</th>
+        <th>Événement</th>
+        <th>Lieu</th>
+        <th>Date</th>
+        <th>Siège</th>
+        <th>Statut</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="res : ${reservations}">
+        <td th:text="${res.idReservation}"></td>
+        <td th:text="${res.utilisateur.nom}"></td>
+        <td th:text="${res.evenement.titre}"></td>
+        <td th:text="${res.evenement.lieu}"></td>
+        <td th:text="${res.evenement.dateEvenement}"></td>
+        <td th:text="${res.siegeNum}"></td>
+        <td th:text="${res.statut}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<p th:if="${reservations.size() == 0}" class="empty-message">Aucune réservation trouvée pour cet événement.</p>
+
+</body>
+</html>

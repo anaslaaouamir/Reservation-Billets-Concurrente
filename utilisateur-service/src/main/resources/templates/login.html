@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Connexion</title>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+<div class="login-container">
+    <h1>Connexion</h1>
+    <form th:action="@{/login}" method="post">
+        <label>Email :</label>
+        <input type="email" name="email" required>
+        <label>Mot de passe :</label>
+        <input type="password" name="motPasse" required>
+        <button type="submit">Se connecter</button>
+    </form>
+    <p class="error-message" th:if="${error}" th:text="${error}"></p>
+</div>
+</body>
+</html>

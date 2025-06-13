@@ -22,7 +22,7 @@ public class UtilisateurServiceApplication {
     @Bean
     CommandLineRunner init( UtilisateurRepository utilisateurRepository) {
         return args -> {
-           Utilisateur user=Utilisateur.builder().email("anas@gmail.com").nom("anas").build();
+           Utilisateur user=Utilisateur.builder().email("anas@gmail.com").nom("anas").motPasse("anas").build();
 
             utilisateurRepository.save(user);
 

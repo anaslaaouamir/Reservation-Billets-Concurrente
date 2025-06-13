@@ -3,6 +3,10 @@ package com.tickets.reservationservice.repositories;
 import com.tickets.reservationservice.entities.Reservation;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ReservationRepository extends JpaRepository<Reservation, Long> {
+import java.util.List;
 
+public interface ReservationRepository extends JpaRepository<Reservation, Long> {
+    boolean existsByIdEvenementAndSiegeNum(Long idEvenement, int siegeNum);
+
+    List<Reservation> findByidReservation(Long idReservation);
 }

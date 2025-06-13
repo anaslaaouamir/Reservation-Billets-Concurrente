@@ -5,6 +5,7 @@ import com.tickets.reservationservice.models.Utilisateur;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -17,18 +18,24 @@ import java.time.LocalDateTime;
 
 public class Reservation {
 
+    public Reservation(Long userId, Long eventId, int seatNumber) {
+        this.idUtilisateur = userId;
+        this.idEvenement = eventId;
+        this.siegeNum = seatNumber;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idReservation;
-    private int siege_num;
-    private LocalDateTime date_reservation;
+    private int siegeNum;
+    private LocalDate dateReservation;
     private String statut;
 
-    private int idUtilisateur;
+    private Long idUtilisateur;
     @Transient
     private Utilisateur utilisateur;
 
-    private int idEvenement;
+    private Long idEvenement;
     @Transient
     private Evenement evenement;
 }

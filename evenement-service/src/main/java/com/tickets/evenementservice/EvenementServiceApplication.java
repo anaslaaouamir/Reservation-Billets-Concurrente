@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @SpringBootApplication
@@ -21,7 +22,8 @@ public class EvenementServiceApplication {
     @Bean
     CommandLineRunner init(EvenementRepository evenementRepository) {
         return args -> {
-            Evenement evenement=Evenement.builder().lieu("Rabat").titre("match maroc").nb_sieges(50000).build();
+            Evenement evenement=Evenement.builder().lieu("Rabat").
+                    titre("match maroc").nb_sieges(50000).dateEvenement(LocalDate.now()).build();
 
             evenementRepository.save(evenement);
 

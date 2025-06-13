@@ -1,4 +1,4 @@
-package com.tickets.evenementservice.entities;
+package com.tickets.reservationservice.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,13 +17,15 @@ import java.time.LocalDateTime;
 @ToString
 @Builder
 
-public class Evenement {
-
+public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEvenement;
-    private String titre;
-    private int nb_sieges;
-    private String lieu;
+    private Long idTicket;
+    private Long idUtilisateur;
+    private Long idReservation;
+    private String NomUtilisateur;
+    private int siegeNum;
+    private String titreEvenement;
     private LocalDate dateEvenement;
+    private String lieu;
 }

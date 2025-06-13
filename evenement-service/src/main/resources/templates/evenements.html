@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Événements</title>
+    <link rel="stylesheet" href="/css/evenements.css">
+</head>
+<body>
+<h1>Liste des Événements</h1>
+<div class="evenement-container">
+    <div class="evenement" th:each="event : ${evenements}">
+        <h2 th:text="${event.titre}">Titre</h2>
+        <p><strong>Lieu:</strong> <span th:text="${event.lieu}">Lieu</span></p>
+        <p><strong>Nombre de sièges:</strong> <span th:text="${event.nb_sieges}">0</span></p>
+        <p><strong>Date:</strong> <span th:text="${event.dateEvenement}">Date</span></p>
+    </div>
+</div>
+</body>
+</html>
