@@ -73,8 +73,7 @@ L’interface HTML/CSS est intégrée dans Spring Boot et permet aux utilisateur
 | Frontend     | HTML, CSS (intégré)                                           |
 | Architecture | Microservices                                                 |
 | Concurrence  | `ReentrantLock`, `@Async`                                     |
-| Base de données | À spécifier (ex : MySQL, PostgreSQL, etc.)                 |
-
+| Base de données | h2
 ---------------------------  
 
 ---------------------------  Résultats attendus
