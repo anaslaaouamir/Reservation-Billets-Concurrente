@@ -1,0 +1,97 @@
+Gestion Concurrente des Réservations de Billets
+
+
+---------------------------  Objectif du projet:
+
+Ce projet a pour but de concevoir une application robuste de réservation de billets pour des événements. Développée avec **Spring Boot** (backend) et **HTML/CSS** (frontend), elle intègre des **mécanismes de gestion concurrente** afin de garantir :
+
+- L'intégrité des données (pas de double réservation)
+- Une meilleure réactivité utilisateur
+- La capacité de gérer des réservations simultanées
+
+---------------------------
+
+---------------------------  Problèmes identifiés
+
+1. Double réservation
+Lorsqu’un grand nombre d’utilisateurs réservent en même temps, il existe un risque que **deux utilisateurs réservent la même place**, créant ainsi une incohérence.
+
+2. Temps de réponse élevé à cause de la génération de ticket
+Une fois la réservation validée, la génération du ticket peut être lente, entraînant une **attente frustrante** pour l'utilisateur.
+
+---------------------------  
+
+---------------------------  Solutions mises en place
+
+- Verrouillage explicite (ReentrantLock)
+Chaque tentative de réservation utilise un verrou associé au couple *(idÉvénement, numéro de siège)*. Cela garantit qu'une **seule réservation** peut se faire sur une place donnée à un moment donné.
+
+- Exécution asynchrone (`@Async`)
+La génération des tickets se fait **en tâche de fond**, ce qui :
+	. Libère immédiatement le thread utilisateur
+	. Accélère la validation de la réservation
+	. Améliore l'expérience utilisateur
+
+---------------------------  
+
+---------------------------  Architecture du projet
+
+- Services métiers:
+	. Utilisateur-service : gestion des utilisateurs
+	. Événement-service : gestion des événements
+	. Réservation-service : logique de réservation et génération des tickets
+
+- Services techniques:
+	. Config-server : centralise la configuration des microservices
+	. Discovery-server (Eureka) : permet la découverte dynamique des services
+	. API Gateway : point d’entrée unique du système
+
+---------------------------  
+
+---------------------------  Communication entre microservices
+
+Les services communiquent via **Spring Cloud OpenFeign**, permettant des appels HTTP internes simples et déclaratifs.
+
+---------------------------  
+
+---------------------------  Interface utilisateur
+
+L’interface HTML/CSS est intégrée dans Spring Boot et permet aux utilisateurs de :
+- Voir les événements disponibles
+- Réserver un billet
+- Consulter ses réservations et tickets
+- Pour l’administrateur : consulter toutes les réservations
+
+---------------------------  
+
+---------------------------  Technologies utilisées
+
+| Type         | Technologies                                                  |
+|--------------|---------------------------------------------------------------|
+| Backend      | Spring Boot, Spring Cloud (Eureka, Config Server, Gateway)    |
+| Communication| Spring Cloud OpenFeign                                        |
+| Frontend     | HTML, CSS (intégré)                                           |
+| Architecture | Microservices                                                 |
+| Concurrence  | `ReentrantLock`, `@Async`                                     |
+| Base de données | À spécifier (ex : MySQL, PostgreSQL, etc.)                 |
+
+---------------------------  
+
+---------------------------  Résultats attendus
+
+- Aucune double réservation possible
+- Réactivité améliorée grâce au traitement asynchrone
+- Scalabilité assurée pour des centaines de réservations simultanées
+
+---
+
+---------------------------  Conclusion
+
+Ce projet illustre l’importance de la **gestion des accès concurrents** dans les systèmes critiques comme ceux de réservation. Grâce à l’usage de **verrous explicites** et d’**exécution asynchrone**, nous avons conçu un système :
+- Fiable
+- Réactif
+- Évolutif
+
+---------------------------  
+
+
