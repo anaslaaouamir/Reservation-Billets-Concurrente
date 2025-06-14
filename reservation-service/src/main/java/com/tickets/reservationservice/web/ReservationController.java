@@ -36,6 +36,7 @@ public class ReservationController {
 
     }
 
+    // Récupère et affiche tous les reservations via l'API
     @GetMapping("/getreservations")
     public List<Reservation> getAllEvenements() {
         List<Reservation> reservations = reservationRepository.findAll();
@@ -54,9 +55,10 @@ public class ReservationController {
         return ress;
     }
 
-    ////////////////////////// START CHANGING ///////////////////////////////
 
 
+
+    // Effectuer la reservation avec la fonction qui utilise LockManager
     @PostMapping("/reserver")
     public ResponseEntity<String> reserver(@RequestParam Long userId,
                                           @RequestParam Long eventId,
@@ -69,6 +71,8 @@ public class ReservationController {
         }
     }
 
+
+    //Effectuer la reservation avec une fonction normale sans utilisation du ReentrantLock
     @PostMapping("/reservations-unlocked")
     public ResponseEntity<String> reserveWithoutLock(@RequestParam Long userId,
                                                      @RequestParam Long eventId,
@@ -81,6 +85,8 @@ public class ReservationController {
         }
     }
 
+
+    // Récupère et affiche tous les tickets via l'API
     @GetMapping("/tickets1")
     public List<Ticket> getAllTickets() {
         List<Ticket> tickets = ticketRepository.findAll();

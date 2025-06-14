@@ -37,6 +37,8 @@ public class ReservationController2 {
         this.reservationRepository = reservationRepository;
     }
 
+    //Affichage  des eveenment dans la page HTML evenements  (src/main/ressources/templates/evenements.html)
+    //pour que l'utilisateur peut reserver un evenement
     @GetMapping("/evenements")
     public String afficherEvenements(@RequestParam("userId") Long userId, Model model) {
         List<Evenement> evenements = evenementOpenFeign.getAllEvenements();
@@ -46,17 +48,17 @@ public class ReservationController2 {
     }
 
 
-
-
-
-
+    //Effectuer une reservation
     @PostMapping("/reserve")
     public String reserve(@RequestParam Long userId,
                           @RequestParam Long eventId,
                           @RequestParam int seatNumber,
                           Model model) {
         try {
+            // avec la fonction qui utilise ReentrantLock
             reservationService.makeReservation(userId, eventId, seatNumber);
+
+            //Pour tester la fonction avec un fonctionnement normale sans ReentrantLock
             //reservationService.makeReservationWithoutLock(userId,eventId,seatNumber);
             model.addAttribute("success", "Réservation réussie !");
         } catch (RuntimeException e) {
@@ -70,6 +72,9 @@ public class ReservationController2 {
         return "evenements"; // Return the same page with a message
     }
 
+
+    //Affichage  des tickets dans la page HTML tickets  (src/main/ressources/templates/tickets.html)
+    //pour que l'utilisateur peut consulter ses tickets evenement
     @GetMapping("/tickets")
     public String showUserTickets(@RequestParam Long userId, Model model) {
         Utilisateur utilisateur = utilisateurOpenFeign.getUtilisateurById(userId);
@@ -83,6 +88,9 @@ public class ReservationController2 {
 
     //////////////////// ADMIN /////////////////////////
 
+
+    //Affichage  des evenements dans la page HTML tickets  (src/main/ressources/templates/evenements_admin.html)
+    //pour que l'admin peut consulter les reservation de chaque evenements
     @GetMapping("/evenements_admin")
     public String afficherEvenementsAdmin(Model model) {
         List<Evenement> evenements = evenementOpenFeign.getAllEvenements();
@@ -90,6 +98,7 @@ public class ReservationController2 {
         return "evenements_admin";
     }
 
+    //Affichage des reservations pour un evenement spécifique dans la page HTML reservations  (src/main/ressources/templates/reservations.html)
     @GetMapping("/reservations")
     public String showReservations(@RequestParam Long id_evenement, Model model) {
         List<Reservation> reservations =  reservationRepository.findByidReservation(id_evenement);

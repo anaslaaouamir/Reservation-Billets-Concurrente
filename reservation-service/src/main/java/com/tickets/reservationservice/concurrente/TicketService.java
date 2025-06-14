@@ -32,24 +32,7 @@ public class TicketService {
 
     }
 
-    //original
-    /*@Async("taskExecutor")
-    public CompletableFuture<Void> generateTicket(Long reservationId) {
-
-        // Simulate ticket generation delay
-        try {
-            System.out.println(Thread.currentThread().getName() + " - Generating ticket for reservation " + reservationId);
-
-            Thread.sleep(20000); // 3 seconds delay for example
-            System.out.println(Thread.currentThread().getName() + " - Ticket generated for reservation " + reservationId);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
-
-        // Return completed future
-        return CompletableFuture.completedFuture(null);
-    }*/
-
+    //generation du ticket utilisant @Async
     @Async("taskExecutor")
     public CompletableFuture<Ticket> generateTicket(Long reservationId) {
 
@@ -73,6 +56,7 @@ public class TicketService {
                     lieu(evenement.getLieu())
             .build();
 
+            //une simulation : supposons que la generation du ticket prend, pour visualiser l'impacte
             Thread.sleep(20000); // 3 seconds delay for example
             System.out.println(Thread.currentThread().getName() + " - Ticket generated for reservation " + reservationId);
 
@@ -88,6 +72,7 @@ public class TicketService {
 
     }
 
+    //generatioon du ticket sans utilisatoin de @Async
     public void generateTicket1(Long reservationId) {
 
         Ticket ticket =null;
@@ -110,6 +95,7 @@ public class TicketService {
                     lieu(evenement.getLieu())
                     .build();
 
+            //une simulation : supposons que la generation du ticket prend, pour visualiser l'impacte
             Thread.sleep(20000); // 3 seconds delay for example
             System.out.println(Thread.currentThread().getName() + " - Ticket generated for reservation " + reservationId);
         } catch (InterruptedException e) {
@@ -119,5 +105,26 @@ public class TicketService {
         // Return completed future
 
     }
+
+
+
+    //original
+    /*@Async("taskExecutor")
+    public CompletableFuture<Void> generateTicket(Long reservationId) {
+
+        // Simulate ticket generation delay
+        try {
+            System.out.println(Thread.currentThread().getName() + " - Generating ticket for reservation " + reservationId);
+
+            Thread.sleep(20000); // 3 seconds delay for example
+            System.out.println(Thread.currentThread().getName() + " - Ticket generated for reservation " + reservationId);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+
+        // Return completed future
+        return CompletableFuture.completedFuture(null);
+    }*/
+
 
 }

@@ -8,6 +8,11 @@ import java.util.concurrent.Executor;
 
 @Configuration
 public class AsyncConfig {
+
+    // Configuration d’un exécuteur de tâches asynchrones avec un pool de threads
+// Permet d’exécuter certaines opérations (ex. : génération de ticket) en arrière-plan
+// sans bloquer le traitement principal des requêtes
+
     @Bean(name = "taskExecutor")
     public Executor taskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
