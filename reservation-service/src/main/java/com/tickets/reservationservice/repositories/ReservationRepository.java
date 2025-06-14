@@ -8,5 +8,5 @@ import java.util.List;
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
     boolean existsByIdEvenementAndSiegeNum(Long idEvenement, int siegeNum);
 
-    List<Reservation> findByidReservation(Long idReservation);
+    List<Reservation> findByidEvenement(Long idEvenement);
 }

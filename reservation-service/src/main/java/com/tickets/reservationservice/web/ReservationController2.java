@@ -101,7 +101,7 @@ public class ReservationController2 {
     //Affichage des reservations pour un evenement spécifique dans la page HTML reservations  (src/main/ressources/templates/reservations.html)
     @GetMapping("/reservations")
     public String showReservations(@RequestParam Long id_evenement, Model model) {
-        List<Reservation> reservations =  reservationRepository.findByidReservation(id_evenement);
+        List<Reservation> reservations =  reservationRepository.findByidEvenement(id_evenement);
         List<Reservation> reservationListe = new ArrayList<>();;
         System.out.println(reservations);
         for (Reservation reservation : reservations) {
